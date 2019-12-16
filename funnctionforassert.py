@@ -1,3 +1,3 @@
-def assertfortown(s,file):
-    return s in file
+def assertfortown(s,cities):
+    return s in [x.name for x in cities]
       

@@ -7,14 +7,14 @@ from  funnctionforassert import assertfortown
 
 
 def Turn(player, last_letter):
+    if last_letter == "":
+        return
     if player == 1:
         print('Введи название города  на ',last_letter)
-        PlayerTurn(last_letter)
-        player=0
+        Turn(0, PlayerTurn(last_letter))
     if player == 0:
         print('Ход Машины')
-        ComputerTurn(last_letter)
-        player=1
+        Turn(1, ComputerTurn(last_letter))
     if player > 1:
         print('Ошибка')
 
@@ -23,27 +23,25 @@ def PlayerTurn(last_letter):
     player_word = input()
     print('ok')
     city = City(player_word)
-    print(City)
-    while (city.first != last_letter) and (assertfortown(city.name, Cities)):
+    while (city.first != last_letter.upper()) or (not assertfortown(city.name, Cities)):
         print('Неправильный город Введите новый')
         player_word = input()
         city = City(player_word)
     print('Игрок1 ввёл город', city.name)
-    last_letter = city.last
+    return city.last
 
     
 def ComputerTurn(last_letter):
-    player_word = search(last_letter,Cities)
-    if not(player_word):
+    computer_word = search(last_letter,Cities)
+    if not computer_word:
         print('Компьютер сдаётся')
-        exit
-    city= City(player_word)
+        return ""
+    city = City(computer_word.name)
     print('Игрок2 ввёл город', city.name)
-    last_letter = сity.last
+    return city.last
 
     
 #GameCikl
 #//////////////
-while True:
-    Turn(1,'А')
+Turn(1,'А')
         
